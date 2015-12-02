@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/rorysterley/project-template-01/issues"
   },
-  "homepage": "https://github.com/rorysterley/project-template-01#readme"
+  "homepage": "https://github.com/rorysterley/project-template-01#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.8.0"
+  }
 }
