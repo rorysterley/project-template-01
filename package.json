@@ -1,0 +1,19 @@
+{
+  "name": "project-template-01",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rorysterley/project-template-01.git"
+  },
+  "author": "Rory Sterley <rorysterley@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rorysterley/project-template-01/issues"
+  },
+  "homepage": "https://github.com/rorysterley/project-template-01#readme"
+}
