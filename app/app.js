@@ -16,5 +16,15 @@ console.log('05: After two blank lines.');
 
 var foo = 'Test variable 01';
 var bar = 'Test variable 02';
+var baz = 'The var of greater bazzlyness!';
+var foobar= 'testfoobarbaz';
+
+var test = 'bad code here';
+var badQuote = "bad Q";
+
+// Blerg!
+// Boom
+
+
 
 console.log('00: TESTING... DONE.');
