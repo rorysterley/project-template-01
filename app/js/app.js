@@ -25,6 +25,4 @@ var badQuote = "bad Q";
 // Blerg!
 // Boom
 
-
-
 console.log('00: TESTING... DONE.');

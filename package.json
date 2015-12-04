@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rorysterley/project-template-01#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
