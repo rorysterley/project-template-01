@@ -1,7 +1,8 @@
 'use strict';
 
 var gulp      = require('gulp');
-var gutil     = require('gulp-util'); // jshint ignore:line
+var gutil     = require('gulp-util');
+var nodemon   = require('gulp-nodemon');
 var clean     = require('gulp-clean');
 var concat    = require('gulp-concat');
 var jshint    = require('gulp-jshint');
@@ -12,12 +13,21 @@ var minifyCss = require('gulp-minify-css');
 /*
  * Notes:
  *
- * use '--type dist' in gulp commands to enable distribution settings.
+ * use '--type dist' in some gulp commands to enable distribution settings.
  * Ex: $ gulp concat-css --type dist
+ *
+ * For development use: $ gulp
+ * For production/distribution use: $ gulp dist --type dist
  */
 
 // Default: execute: $ gulp
-gulp.task('default', ['watch']);
+gulp.task('default', ['build', 'nodemon', 'watch']);
+
+// Server ======================================================================
+
+gulp.task('nodemon', function() {
+  nodemon({ script: 'server.js'});
+});
 
 // Linting =====================================================================
 
@@ -35,24 +45,16 @@ gulp.task('jscs', function() {
 });
 
 // BUILD / DIST ================================================================
-gulp.task('build', ['clean-all', 'concat-js', 'concat-css', 'copy-html']);
+gulp.task('build', ['concat-js', 'concat-css', 'copy-html', 'copy-img']);
+
 gulp.task('dist', ['build'], function() {
   gutil.env.type === 'dist'
-  ? console.log(' Wow such dist!')
+  ? console.log('\n Wow such dist!\n')
   : console.log('\n' +
               ' ============================================\n' +
               ' = You forgot to call this with --type dist =\n' +
               ' = $ gulp dist --type dist                  =\n' +
               ' ============================================\n');
-});
-
-// Ensures 100% clean for full build/dist testing (No surprises)
-gulp.task('clean-all', function() {
-  return gulp.src((gutil.env.type === 'dist'
-      ? ['dist/*']
-      : ['build/*']),
-      {read: false})
-    .pipe(clean({force: true}));
 });
 
 // ----- JS -----
@@ -102,6 +104,18 @@ gulp.task('copy-html', ['clean-html'], function() {
 });
 
 // ----- IMG -----
+gulp.task('clean-img', function() {
+  return gulp.src((gutil.env.type === 'dist'
+      ? ['dist/img/**/*']
+      : ['build/img/**/*']),
+      {read: false})
+    .pipe(clean({force: true}));
+});
+
+gulp.task('copy-img', ['clean-img'], function() {
+  return gulp.src(['app/img/**/*'], {base: './app'})
+    .pipe(gulp.dest(gutil.env.type === 'dist' ? 'dist/' : 'build/'));
+});
 
 // WATCH =======================================================================
 gulp.task('watch', function() {
@@ -116,6 +130,7 @@ gulp.task('watch', function() {
   gulp.watch(['app/**/*.html'], ['copy-html']);
 
   // ----- IMG -----
+  gulp.watch(['app/img/**/*'], ['copy-img']);
 
   console.log(' ===========================\n' +
               ' = gulp is watching you... =  (To stop watch: Ctrl + C)\n' +
