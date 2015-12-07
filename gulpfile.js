@@ -3,6 +3,7 @@
 var gulp      = require('gulp');
 var gutil     = require('gulp-util');
 var nodemon   = require('gulp-nodemon');
+var mocha     = require('gulp-mocha');
 var clean     = require('gulp-clean');
 var concat    = require('gulp-concat');
 var jshint    = require('gulp-jshint');
@@ -115,6 +116,16 @@ gulp.task('clean-img', function() {
 gulp.task('copy-img', ['clean-img'], function() {
   return gulp.src(['app/img/**/*'], {base: './app'})
     .pipe(gulp.dest(gutil.env.type === 'dist' ? 'dist/' : 'build/'));
+});
+
+// TESTING =====================================================================
+
+// Not yet working with watch
+gulp.task('mocha', function() {
+  return gulp.src('test/server/**/*.js', { read: false })
+    .pipe(mocha({reporter: 'nyan'}))
+    .once('error', function() { process.exit(1); })
+    .once('end', function() { process.exit(); });
 });
 
 // WATCH =======================================================================
