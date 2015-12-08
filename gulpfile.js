@@ -119,8 +119,9 @@ gulp.task('copy-img', ['clean-img'], function() {
 });
 
 // TESTING =====================================================================
+gulp.task('test-server', ['mocha']);
 
-// Not yet working with watch
+// Not compatile with watch streams
 gulp.task('mocha', function() {
   return gulp.src('test/server/**/*.js', { read: false })
     .pipe(mocha({reporter: 'nyan'}))
@@ -131,7 +132,7 @@ gulp.task('mocha', function() {
 // WATCH =======================================================================
 gulp.task('watch', function() {
   // ----- JS -----
-  gulp.watch(['server.js'], ['jshint', 'jscs']);
+  gulp.watch(['server.js'], ['jshint', 'jscs', 'mocha']);
   gulp.watch(['app/js/**/*.js'], ['jshint', 'jscs', 'concat-js']);
 
   // ----- CSS -----
