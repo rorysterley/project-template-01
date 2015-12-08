@@ -132,7 +132,7 @@ gulp.task('mocha', function() {
 // WATCH =======================================================================
 gulp.task('watch', function() {
   // ----- JS -----
-  gulp.watch(['server.js'], ['jshint', 'jscs', 'mocha']);
+  gulp.watch(['server.js'], ['jshint', 'jscs']);
   gulp.watch(['app/js/**/*.js'], ['jshint', 'jscs', 'concat-js']);
 
   // ----- CSS -----
