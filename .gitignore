@@ -50,3 +50,14 @@ Thumbs.db
 *~
 *.swp
 *.swo
+
+# Folders #
+###########
+build
+dist
+db
+
+# Environmental #
+#################
+Procfile
+.env
